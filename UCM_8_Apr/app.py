@@ -2,7 +2,7 @@ from datetime import datetime
 from flask import Flask, flash, render_template, url_for, flash, redirect, request
 import csv
 
-from flask_sqlalchemy import SQLAlchemy
+
 # using those forms created here in our application
 
 
@@ -29,7 +29,7 @@ def reg():
         print("username=", request.form["username"])
         email = request.form["email"]
         print("Email=", request.form["email"])
-        password = request.form["password"]
+        password = request.form["psw"]
         print("Confirm_password=", request.form["cpsw"])
         print("Aadhaar=", request.form["Aadhaar"])
         print("phone_code=", request.form["phoneCode"])
@@ -37,7 +37,7 @@ def reg():
 
         fieldnames = ['username', 'password']
 
-        with open('nameList.csv', 'a') as inFile:
+        with open('nameListUser.csv', 'a') as inFile:
             # DictWriter will help you write the file easily by treating the
             # csv as a python's class and will allow you to work with
             # dictionaries instead of having to add the csv manually.
@@ -65,7 +65,7 @@ def doc():
 
         fieldnames = ['username', 'password']
 
-        with open('nameListDoc.csv', 'w') as inFile:
+        with open('nameListDoc.csv', 'a') as inFile:
             # DictWriter will help you write the file easily by treating the
             # csv as a python's class and will allow you to work with
             # dictionaries instead of having to add the csv manually.
@@ -87,15 +87,15 @@ def log():
     if 'check' in request.form:
         check = request.form['check']
 
-        error = None
+        error = ""
         if request.method == 'POST':
             username = request.form['username']
             password = request.form['password']
-            with open('nameListDoc.csv', 'a') as file:
+            with open('nameListDoc.csv', 'r') as file:
                 reader = csv.reader(file)
                 for row in reader:
                     if row[0] == username and row[1] == password:
-                        return render_template('index.html', username=username)
+                        return redirect('/dashboardDoc/{}'.format(username))
                     else:
                         error = 'Invalid Credentials. Please try again.'
                         flash(error, "error")
@@ -103,7 +103,7 @@ def log():
 
 # Checking for UserCondition
     else:
-        error = None
+        error = ""
         if request.method == 'POST':
             username = request.form['username']
             password = request.form['password']
@@ -111,7 +111,7 @@ def log():
                 reader = csv.reader(file)
                 for row in reader:
                     if row[0] == username and row[1] == password:
-                        return render_template('index.html', username=username)
+                        return redirect('/dashboardUser/{}'.format(username))
                     else:
                         error = 'Invalid Credentials. Please try again.'
                         flash(error, "error")
@@ -119,7 +119,20 @@ def log():
 
     #print("check=", request.form["check"], False)
     #print("check=", request.form["check"], False)
-    return render_template("login.html")
+    return render_template("login.htmlz")
+
+
+@app.route('/dashboardUser/<username>' ,methods=['GET','POST'])
+def dashboard(username):
+    return render_template("dashboardUser.html",username = username)
+
+
+
+@app.route('/dashboardDoc/<username>' ,methods=['GET','POST'])
+def dashboardDoc(username):
+    return render_template("dashboardDoc.html",username = username)
+
+
 
 
 if __name__ == '__main__':
