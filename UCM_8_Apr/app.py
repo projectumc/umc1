@@ -26,22 +26,14 @@ def reg():
     errors = {}
     if request.method == "POST":
         username = request.form["username"]
-        #print("username=", request.form["username"])
+        print("username=", request.form["username"])
         email = request.form["email"]
-
-        first_name = request.form["firstname"]
-        last_name = request.form["lastname"]
-        location = request.form["location"]
-        dob = request.form["dateofbirth"]
-
-        #print("Email=", request.form["email"])
+        print("Email=", request.form["email"])
         password = request.form["psw"]
         print("Confirm_password=", request.form["cpsw"])
-        Aadhar = request.form['Aadhar']
-        #print("Aadhaar=", request.form["Aadhaar"])
+        print("Aadhaar=", request.form["Aadhaar"])
         print("phone_code=", request.form["phoneCode"])
-        phone_number = request.form['phone_number']
-        #print("phone_number=", request.form["phone"])
+        print("phone_number=", request.form["phone"])
 
         fieldnames = ['username', 'password']
 
@@ -63,23 +55,20 @@ def doc():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["psw"]
-
+        print("User=", request.form["username"])
+        print("Email=", request.form["email"])
+        # added new
         first_name = request.form["firstname"]
         last_name = request.form["lastname"]
         location = request.form["location"]
         dob = request.form["dateofbirth"]
-        hospitalname = request.form['hospitalname']
-
-        print("User=", request.form["username"])
-        print("Email=", request.form["email"])
         print("Password=", request.form["psw"])
         print("Confirm_password=", request.form["cpsw"])
         print("Aadhaar=", request.form["Aadhaar"])
         print("phone_code=", request.form["phoneCode"])
         print("phone_number=", request.form["phone"])
 
-        fieldnames = ['first_name', 'last_name', 'location',
-                      'hospitalname', 'username', 'password']
+        fieldnames = ['username', 'password']
 
         with open('nameListDoc.csv', 'a') as inFile:
             # DictWriter will help you write the file easily by treating the
@@ -88,8 +77,7 @@ def doc():
             writer = csv.DictWriter(inFile, fieldnames=fieldnames)
             # writerow() will write a row in your csv file
             # while()
-            writer.writerow({'first_name': first_name, 'last_name': last_name, 'location': location, 'hospitalname': hospitalname,
-                            'username': username, 'password': password})
+            writer.writerow({'username': username, 'password': password})
 
     return render_template('doctor.html', title='Register', errors=errors)
 
@@ -139,14 +127,17 @@ def log():
     return render_template("login.htmlz")
 
 
-@app.route('/dashboardUser/<username>', methods=['GET', 'POST'])
+@app.route('/dashboardUser/<username>' ,methods=['GET','POST'])
 def dashboard(username):
-    return render_template("dashboardUser.html", username=username)
+    return render_template("dashboardUser.html",username = username)
 
 
-@app.route('/dashboardDoc/<username>', methods=['GET', 'POST'])
+
+@app.route('/dashboardDoc/<username>' ,methods=['GET','POST'])
 def dashboardDoc(username):
-    return render_template("dashboardDoc.html", username=username)
+    return render_template("dashboardDoc.html",username = username)
+
+
 
 
 if __name__ == '__main__':
