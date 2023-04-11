@@ -24,8 +24,9 @@ def cont():
 
 
 @app.route('/register', methods=['GET', 'POST'])
+
 def reg():
-    phone = request.form['phone']
+    errors = {}
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["psw"]
@@ -54,36 +55,35 @@ def reg():
 
 
 @app.route('/doctor', methods=['GET', 'POST'])
+
 def doc():
     errors = {}
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["psw"]
-        print("User=", request.form["username"])
-        print("Email=", request.form["email"])
-        # added new
-        first_name = request.form["firstname"]
-        last_name = request.form["lastname"]
+        email = request.form['email']
+        firstname = request.form["firstname"]
+        lastname = request.form["lastname"]
         location = request.form["location"]
-        dob = request.form["dateofbirth"]
-        print("Password=", request.form["psw"])
-        print("Confirm_password=", request.form["cpsw"])
-        print("Aadhaar=", request.form["Aadhaar"])
-        print("phone_code=", request.form["phoneCode"])
-        print("phone_number=", request.form["phone"])
+        dateofbirth = request.form["dateofbirth"]
+        aadhaar = request.form['aadhaar']
+        phone = request.form['phone']
 
-        fieldnames = ['username', 'password']
+        fieldnamesU = ['username', 'email', 'firstname', 'lastname',
+                       'location', 'dateofbirth', 'password', 'aadhaar', 'phone']
 
-        with open('nameListDoc.csv', 'a') as inFile:
+        with open('nameListDoc.csv', 'a', newline='') as inFile:
             # DictWriter will help you write the file easily by treating the
             # csv as a python's class and will allow you to work with
             # dictionaries instead of having to add the csv manually.
-            writer = csv.DictWriter(inFile, fieldnames=fieldnames)
+            writer = csv.DictWriter(inFile, fieldnames=fieldnamesU)
             # writerow() will write a row in your csv file
             # while()
-            writer.writerow({'username': username, 'password': password})
+            writer.writerow({'username': username, 'email': email, 'firstname': firstname, 'lastname': lastname,
+                            'location': location, 'dateofbirth': dateofbirth, 'password': password,  'aadhaar': aadhaar,  'phone': phone})
 
-    return render_template('doctor.html', title='Register', errors=errors)
+    return render_template('doctor.html', title='Register', errors=errors, data=df)
+    
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -132,22 +132,35 @@ def dashboard(username):
     with open('nameListUser.csv', 'r', newline='') as file:
         reader = csv.reader(file)
         for row in reader:
-            firstname = row[0]
-            lastname = row[3]
-            location = row[4]
-            dateofbirth = row[5]
-            email = row[1]
-            phone = row[8]
-            aadhaar = row[7]
+            if row[0]==username:
+             firstname = row[2]
+             lastname = row[3]
+             location = row[4]
+             dateofbirth = row[5]
+             email = row[1]
+             phone = row[8]
+             aadhaar = row[7]
 
     return render_template("dashboardUser.html", username=username, firstname=firstname, lastname=lastname, location=location, dateofbirth=dateofbirth, email=email, phone=phone, aadhaar=aadhaar)
 
 
 @app.route('/dashboardDoc/<username>', methods=['GET', 'POST'])
-def dashboardDoc(fname, lname, loc, dob, email, pno, ano):
+def dashboarddoc(username):
+    with open('nameListDoc.csv', 'r', newline='') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            if row[0]==username:
+             firstname = row[2]
+             lastname = row[3]
+             location = row[4]
+             dateofbirth = row[5]
+             email = row[1]
+             phone = row[8]
+             aadhaar = row[7]
 
-    return render_template("dashboardDoc.html")
+    return render_template("dashboardDoc.html", username=username, firstname=firstname, lastname=lastname, location=location, dateofbirth=dateofbirth, email=email, phone=phone, aadhaar=aadhaar)
 
 
 if __name__ == '__main__':
+
     app.run(debug=True)

@@ -125,10 +125,11 @@ body {
 /* Main */
 .main {
     margin-top: 2%;
-    margin-left: 29%;
+    margin-left: 15%;
     font-size: 28px;
-    padding: 0 10px;
-    width: 58%;
+    /* padding: 0 10px; */
+    width: 81%;
+    overflow: scroll;
 }
 
 .main h2 {
@@ -144,15 +145,15 @@ body {
     box-shadow: 1px 1px 8px 0 grey;
     height: auto;
     margin-bottom: 20px;
-    padding: 20px 0 20px 50px;
+    /* padding: 20px 0 20px 50px; */
 }
 
 .main .card table {
     border: none;
     font-size: 25px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    height: 900px;
-    width: 80%;
+    height: 950px;
+    width: 1000px;
 }
 
 .edit {
