@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Medical History</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="{{ url_for('static',filename = 'historyU.css')}}"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <h1>Medical History</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Diagnosis</th>
+          <th>Treatment</th>
+          <th>Prescription</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2022-05-15</td>
+          <td>Mild fever</td>
+          <td>Rest and plenty of fluids</td>
+          <td>None</td>
+        </tr>
+        <tr>
+          <td>2022-01-20</td>
+          <td>Broken arm</td>
+          <td>Surgery to set the bone, followed by immobilization in a cast</td>
+          <td>Acetaminophen for pain relief</td>
+        </tr>
+        <tr>
+          <td>2021-08-02</td>
+          <td>High blood pressure</td>
+          <td>Prescribed medication and dietary changes</td>
+          <td>Losartan and low-sodium diet</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
