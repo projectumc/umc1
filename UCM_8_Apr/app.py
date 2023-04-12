@@ -171,6 +171,7 @@ def userhistory():
     return render_template("historyUser.html")
 
 
+<<<<<<< Updated upstream
 @app.route('/scanner', methods=['GET', 'POST'])
 def scan():
     cap = cv2.VideoCapture(0)
@@ -217,6 +218,8 @@ def scan():
 
     
 
+=======
+>>>>>>> Stashed changes
 if __name__ == '__main__':
 
     app.run(debug=True)
