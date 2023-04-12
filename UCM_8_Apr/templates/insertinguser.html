@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Patient History</title>
+  </head>
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="{{ url_for('static',filename = 'insertinguser.css')}}"
+  />
+
+  <body>
+    <h1>Adding Details</h1>
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" /><br /><br />
+
+      <label for="dob">Date of Birth:</label>
+      <input type="date" id="dob" name="dob" /><br /><br />
+
+      <label for="gender">Gender:</label>
+      <select id="gender" name="gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option></select
+      ><br /><br />
+
+      <label for="symptoms">Symptoms:</label><br />
+      <textarea id="symptoms" name="symptoms"></textarea><br /><br />
+
+      <label for="diagnosis">Diagnosis:</label><br />
+      <textarea id="diagnosis" name="diagnosis"></textarea><br /><br />
+
+      <label for="treatment">Treatment:</label><br />
+      <textarea id="treatment" name="treatment"></textarea><br /><br />
+
+      <input type="submit" value="Save" />
+    </form>
+  </body>
+</html>

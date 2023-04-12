@@ -159,14 +159,11 @@ def dashboarddoc(username):
     return render_template("dashboardDoc.html", username=username, firstname=firstname, lastname=lastname, location=location, dateofbirth=dateofbirth, email=email, phone=phone, aadhaar=aadhaar)
 
 
-@app.route('/doctorhistory', methods=['GET', 'POST'])
+@app.route('/insertinguser', methods=['GET', 'POST'])
 def history():
-    return render_template('historyDoctor.html')
+    return render_template('insertinguser.html')
 
 
-@app.route('/userhistory', methods=['GET', 'POST'])
-def userhistory():
-    return render_template("historyUser.html")
 
 if __name__ == '__main__':
 
