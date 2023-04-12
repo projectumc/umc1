@@ -164,6 +164,9 @@ def history():
     return render_template('historyDoctor.html')
 
 
+@app.route('/userhistory', methods=['GET', 'POST'])
+def userhistory():
+    return render_template("historyUser.html")
 
 if __name__ == '__main__':
 
