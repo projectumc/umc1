@@ -131,6 +131,7 @@ def log():
 def dashboard(username):
     with open('nameListUser.csv', 'r', newline='') as file:
         reader = csv.reader(file)
+
         for row in reader:
             if row[0]==username:
              firstname = row[2]
@@ -159,6 +160,11 @@ def dashboarddoc(username):
              aadhaar = row[7]
 
     return render_template("dashboardDoc.html", username=username, firstname=firstname, lastname=lastname, location=location, dateofbirth=dateofbirth, email=email, phone=phone, aadhaar=aadhaar)
+
+
+@app.route('/userhistory',methods = ['GET','POST'])
+def history():
+    return render_template('history.html')
 
 
 if __name__ == '__main__':
