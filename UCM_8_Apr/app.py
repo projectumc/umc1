@@ -24,7 +24,6 @@ def cont():
 
 
 @app.route('/register', methods=['GET', 'POST'])
-
 def reg():
     errors = {}
     if request.method == "POST":
@@ -55,7 +54,6 @@ def reg():
 
 
 @app.route('/doctor', methods=['GET', 'POST'])
-
 def doc():
     errors = {}
     if request.method == "POST":
@@ -83,7 +81,6 @@ def doc():
                             'location': location, 'dateofbirth': dateofbirth, 'password': password,  'aadhaar': aadhaar,  'phone': phone})
 
     return render_template('doctor.html', title='Register', errors=errors, data=df)
-    
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -133,14 +130,14 @@ def dashboard(username):
         reader = csv.reader(file)
 
         for row in reader:
-            if row[0]==username:
-             firstname = row[2]
-             lastname = row[3]
-             location = row[4]
-             dateofbirth = row[5]
-             email = row[1]
-             phone = row[8]
-             aadhaar = row[7]
+            if row[0] == username:
+                firstname = row[2]
+                lastname = row[3]
+                location = row[4]
+                dateofbirth = row[5]
+                email = row[1]
+                phone = row[8]
+                aadhaar = row[7]
 
     return render_template("dashboardUser.html", username=username, firstname=firstname, lastname=lastname, location=location, dateofbirth=dateofbirth, email=email, phone=phone, aadhaar=aadhaar)
 
@@ -150,21 +147,22 @@ def dashboarddoc(username):
     with open('nameListDoc.csv', 'r', newline='') as file:
         reader = csv.reader(file)
         for row in reader:
-            if row[0]==username:
-             firstname = row[2]
-             lastname = row[3]
-             location = row[4]
-             dateofbirth = row[5]
-             email = row[1]
-             phone = row[8]
-             aadhaar = row[7]
+            if row[0] == username:
+                firstname = row[2]
+                lastname = row[3]
+                location = row[4]
+                dateofbirth = row[5]
+                email = row[1]
+                phone = row[8]
+                aadhaar = row[7]
 
     return render_template("dashboardDoc.html", username=username, firstname=firstname, lastname=lastname, location=location, dateofbirth=dateofbirth, email=email, phone=phone, aadhaar=aadhaar)
 
 
-@app.route('/userhistory',methods = ['GET','POST'])
+@app.route('/doctorhistory', methods=['GET', 'POST'])
 def history():
-    return render_template('history.html')
+    return render_template('historyDoctor.html')
+
 
 
 if __name__ == '__main__':
