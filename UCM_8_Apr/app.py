@@ -27,6 +27,9 @@ def cont():
 
 @app.route('/register', methods=['GET', 'POST'])
 def reg():
+    results = pd.read_csv('nameListUser.csv')
+    x = len(results)
+    sno = x
     errors = {}
     if request.method == "POST":
         username = request.form["username"]
@@ -39,7 +42,8 @@ def reg():
         aadhaar = request.form['aadhaar']
         phone = request.form['phone']
 
-        fieldnamesU = ['username', 'email', 'firstname', 'lastname',
+        
+        fieldnamesU = ['sno','username', 'email', 'firstname', 'lastname',
                        'location', 'dateofbirth', 'password', 'aadhaar', 'phone']
 
         with open('nameListUser.csv', 'a', newline='') as inFile:
@@ -49,7 +53,9 @@ def reg():
             writer = csv.DictWriter(inFile, fieldnames=fieldnamesU)
             # writerow() will write a row in your csv file
             # while()
-            writer.writerow({'username': username, 'email': email, 'firstname': firstname, 'lastname': lastname,
+            sno = x+1
+
+            writer.writerow({"sno":sno,'username': username, 'email': email, 'firstname': firstname, 'lastname': lastname,
                             'location': location, 'dateofbirth': dateofbirth, 'password': password,  'aadhaar': aadhaar,  'phone': phone})
 
     return render_template('register.html', title='Register', errors=errors, data=df)
@@ -57,6 +63,9 @@ def reg():
 
 @app.route('/doctor', methods=['GET', 'POST'])
 def doc():
+    results = pd.read_csv('nameListUser.csv')
+    x = len(results)
+    sno = x
     errors = {}
     if request.method == "POST":
         username = request.form["username"]
@@ -69,7 +78,7 @@ def doc():
         aadhaar = request.form['aadhaar']
         phone = request.form['phone']
 
-        fieldnamesU = ['username', 'email', 'firstname', 'lastname',
+        fieldnamesU = ['sno','username', 'email', 'firstname', 'lastname',
                        'location', 'dateofbirth', 'password', 'aadhaar', 'phone']
 
         with open('nameListDoc.csv', 'a', newline='') as inFile:
@@ -79,7 +88,7 @@ def doc():
             writer = csv.DictWriter(inFile, fieldnames=fieldnamesU)
             # writerow() will write a row in your csv file
             # while()
-            writer.writerow({'username': username, 'email': email, 'firstname': firstname, 'lastname': lastname,
+            writer.writerow({'sno':sno,'username': username, 'email': email, 'firstname': firstname, 'lastname': lastname,
                             'location': location, 'dateofbirth': dateofbirth, 'password': password,  'aadhaar': aadhaar,  'phone': phone})
 
     return render_template('doctor.html', title='Register', errors=errors, data=df)
@@ -102,7 +111,7 @@ def log():
             with open('nameListDoc.csv', 'r', newline='') as file:
                 reader = csv.reader(file)
                 for row in reader:
-                    if row[0] == username and row[6] == password:
+                    if row[1] == username and row[7] == password:
                         return redirect('/dashboardDoc/{}'.format(username))
                     else:
                         error = 'Invalid Credentials. Please try again.'
@@ -118,7 +127,7 @@ def log():
             with open('nameListUser.csv', 'r') as file:
                 reader = csv.reader(file)
                 for row in reader:
-                    if row[0] == username and row[6] == password:
+                    if row[1] == username and row[7] == password:
                         return redirect('/dashboardUser/{}'.format(username))
                     else:
                         error = 'Invalid Credentials. Please try again.'
@@ -132,14 +141,14 @@ def dashboard(username):
         reader = csv.reader(file)
 
         for row in reader:
-            if row[0] == username:
-                firstname = row[2]
-                lastname = row[3]
-                location = row[4]
-                dateofbirth = row[5]
-                email = row[1]
-                phone = row[8]
-                aadhaar = row[7]
+            if row[1] == username:
+                firstname = row[3]
+                lastname = row[4]
+                location = row[5]
+                dateofbirth = row[6]
+                email = row[2]
+                phone = row[9]
+                aadhaar = row[8]
 
     return render_template("dashboardUser.html", username=username, firstname=firstname, lastname=lastname, location=location, dateofbirth=dateofbirth, email=email, phone=phone, aadhaar=aadhaar)
 
@@ -149,14 +158,15 @@ def dashboarddoc(username):
     with open('nameListDoc.csv', 'r', newline='') as file:
         reader = csv.reader(file)
         for row in reader:
-            if row[0] == username:
-                firstname = row[2]
-                lastname = row[3]
-                location = row[4]
-                dateofbirth = row[5]
-                email = row[1]
-                phone = row[8]
-                aadhaar = row[7]
+            if row[1] == username:
+                firstname = row[3]
+                lastname = row[4]
+                location = row[5]
+                dateofbirth = row[6]
+                email = row[2]
+                phone = row[9]
+                aadhaar = row[8]
+            
 
     return render_template("dashboardDoc.html", username=username, firstname=firstname, lastname=lastname, location=location, dateofbirth=dateofbirth, email=email, phone=phone, aadhaar=aadhaar)
 
@@ -171,45 +181,32 @@ def userhistory():
     return render_template("historyUser.html")
 
 
-<<<<<<< Updated upstream
-@app.route('/scanner', methods=['GET', 'POST'])
+@app.route('/scan')
 def scan():
-    cap = cv2.VideoCapture(0)
-
-# Keep track of detected QR codes
-    detected_qr_codes = set()
+    global camera
+    camera = cv2.VideoCapture(0)
 
     while True:
-        # Read the current frame from camera
-        _, frame = cap.read()
-
-        # Use pyzbar to decode any QR codes in the frame
-        decoded_objs = pyzbar.decode(frame)
-
-        # Loop over all the detected QR codes
-        for decoded_obj in decoded_objs:
-            # Extract the QR code's data
-            data = decoded_obj.data.decode('utf-8')
-            if data not in detected_qr_codes:
-                # Print the QR code's data if it hasn't been printed already
-                print(f"Found QR code: {data}")
-                cv2.destroyAllWindows()
-                cap.release()
-                exit()
-
-        # Show the frame
-        cv2.imshow('QR Code Reader', frame)
-
-        # Check for the 'q' key to quit
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        success, frame = camera.read()  # read the camera frame
+        if not success:
+            break
+        else:
+            decoded_objects = pyzbar.decode(frame)  # decode QR codes in the frame
+            if decoded_objects:
+                # Do something with the QR code data here
+                print(decoded_objects[0].data)
+                camera.release() # release the camera when a QR code is detected
+                data =decoded_objects[0].data.decode('utf-8')
+                print(data)
+            
+        cv2.imshow('QR Code Scanner', frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'): # press 'q' to quit
             break
 
-    # Release the camera and close the window
-    cap.release()
-    exit()
-    cv2.destroyAllWindows()
-    return render_template("qrscanner.html",data= data)
+    camera.release() # release the camera when done
+    cv2.destroyAllWindows() # destroy all windows
 
+    return render_template("historyUser.html")
 
     
 
@@ -218,8 +215,6 @@ def scan():
 
     
 
-=======
->>>>>>> Stashed changes
 if __name__ == '__main__':
 
     app.run(debug=True)
