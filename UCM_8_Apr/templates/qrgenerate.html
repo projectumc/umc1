@@ -7,9 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div style="border: 1px solid black; width: 300px; height: 300px; text-align: center;">
-        <img src='qrcodes/34fgrgrgrr.jpg' alt="description of your image" style="max-width: 100%; max-height: 100%; display: inline-block; margin: auto;">
-    </div>
-    
+    <img src="{{ url_for('static', filename=full_path)}}" alt="My QR Code">
+    <!-- <img src="{{ url_for('static', filename='qr_code/ + {{uid}}') }}" alt="Image for UID {{ uid }}"> -->
 </body>
 </html>

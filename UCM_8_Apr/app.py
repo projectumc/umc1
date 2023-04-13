@@ -8,9 +8,8 @@ import qrcode
 from io import BytesIO
 import os
 # using those forms created here in our application
-
-
 app = Flask(__name__)
+
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 df = pd.read_csv('nameListDoc.csv')
@@ -233,14 +232,25 @@ def gen(username):
             if row[1] == username:
                uid = row[10]
 
-    qr = qrcode.QRCode(version=1, box_size=10, border=5)
-    qr.add_data(uid)
-    qr.make(fit=True)
-    img = qr.make_image(fill_color="black", back_color="white")
-    img.save(r'C:\Users\Aamir\Desktop\UCM_8_Apr\static\qrcodes\{}.jpg'.format(uid))
-    
-    
-    return render_template("qrgenerate.html",username = username ,uid = uid,img = img)
+    save_directory = "static/qr_code"
+    if not os.path.exists(save_directory):
+       os.makedirs(save_directory)
+
+
+
+    file_path = os.path.join(save_directory, "{}.png".format(uid))
+    if not os.path.isfile(file_path):
+        qr_code = qrcode.QRCode(version=1, box_size=10, border=5)
+        qr_code.add_data(uid)
+        qr_code.make(fit=True)
+        img = qr_code.make_image(fill_color="black", back_color="white")
+        img.save(file_path)
+    full_path = "qr_code/"+uid+".png"
+        
+       
+
+
+    return render_template("qrgenerate.html",username = username ,uid = uid,full_path = full_path)
                                   
     
 
