@@ -184,10 +184,20 @@ def userhistory():
     return render_template("historyUser.html")
 
 
+
 @app.route('/scan')
 def scan():
     global camera
     camera = cv2.VideoCapture(0)
+
+@app.route('/scanner', methods=['GET', 'POST'])
+def scan1():
+    #cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+
+# Keep track of detected QR codes
+    detected_qr_codes = set()
+
 
     while True:
         success, frame = camera.read()  # read the camera frame
@@ -219,6 +229,13 @@ def gen():
 
 
     
+
+    # Release the camera and close the window
+    cap.release()
+    cv2.destroyAllWindows()
+    return render_template("qrscanner.html", data=data)
+
+
 
 if __name__ == '__main__':
 
