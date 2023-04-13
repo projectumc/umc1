@@ -6,6 +6,7 @@ import cv2
 import pyzbar.pyzbar as pyzbar
 import qrcode
 from io import BytesIO
+import os
 # using those forms created here in our application
 
 
@@ -140,6 +141,12 @@ def log():
 
 @app.route('/dashboardUser/<username>', methods=['GET', 'POST'])
 def dashboard(username):
+
+    if request.method == 'POST':
+        if 'click' in request.form:
+             return redirect('/qrgenerate/{}'.format(username))
+            
+
     with open('nameListUser.csv', 'r', newline='') as file:
         reader = csv.reader(file)
 
@@ -153,7 +160,10 @@ def dashboard(username):
                 phone = row[9]
                 aadhaar = row[8]
 
-    return render_template("dashboardUser.html", username=username, firstname=firstname, lastname=lastname, location=location, dateofbirth=dateofbirth, email=email, phone=phone, aadhaar=aadhaar)
+               
+        
+
+    return render_template("dashboardUser.html",username=username, firstname=firstname, lastname=lastname, location=location, dateofbirth=dateofbirth, email=email, phone=phone, aadhaar=aadhaar)
 
 
 @app.route('/dashboardDoc/<username>', methods=['GET', 'POST'])
@@ -169,6 +179,8 @@ def dashboarddoc(username):
                 email = row[2]
                 phone = row[9]
                 aadhaar = row[8]
+
+                
             
 
     return render_template("dashboardDoc.html", username=username, firstname=firstname, lastname=lastname, location=location, dateofbirth=dateofbirth, email=email, phone=phone, aadhaar=aadhaar)
@@ -184,20 +196,10 @@ def userhistory():
     return render_template("historyUser.html")
 
 
-
 @app.route('/scan')
 def scan():
     global camera
     camera = cv2.VideoCapture(0)
-
-@app.route('/scanner', methods=['GET', 'POST'])
-def scan1():
-    #cap = cv2.VideoCapture(0)
-    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
-
-# Keep track of detected QR codes
-    detected_qr_codes = set()
-
 
     while True:
         success, frame = camera.read()  # read the camera frame
@@ -222,20 +224,28 @@ def scan1():
     return render_template("historyUser.html")
 
 
-@app.route('/qrgenerate', methods=['GET', 'POST'])
-def gen():
-    return render_template("qrgenerate.html")
+@app.route('/qrgenerate/<username>', methods=['GET', 'POST'])
+def gen(username):
+    uid = ""
+    with open('nameListUser.csv', 'r', newline='') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            if row[1] == username:
+               uid = row[10]
+
+    qr = qrcode.QRCode(version=1, box_size=10, border=5)
+    qr.add_data(uid)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color="black", back_color="white")
+    img.save(r'C:\Users\Aamir\Desktop\UCM_8_Apr\static\qrcodes\{}.jpg'.format(uid))
+    
+    
+    return render_template("qrgenerate.html",username = username ,uid = uid,img = img)
+                                  
     
 
 
     
-
-    # Release the camera and close the window
-    cap.release()
-    cv2.destroyAllWindows()
-    return render_template("qrscanner.html", data=data)
-
-
 
 if __name__ == '__main__':
 

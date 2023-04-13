@@ -1,3 +1,5 @@
-'sno','username', 'email', 'firstname', 'lastname','location', 'dateofbirth', 'password', 'aadhaar', 'phone'
-1,aamir123,syedaamirbokhari57@gmail.com,syed,aamir,effe,2023-03-29,123,ggggg,9686104981
-2,Pogo,syedaamirbokhari57@gmail.com,Radghika,fefeaf,fefef,2023-03-27,123,grgr,9686104981,2Rf4981grgr
+'sno','username', 'email', 'firstname', 'lastname','location', 'dateofbirth', 'password', 'aadhaar', 'phone','uid'
+1,Pogo,syedaamirbokhari57@gmail.com,POGO,Mukherjee,bedroom,2023-03-27,123,grgr,9686104981,2Rf4981grgr
+2,Aamir123,syedaamirbokhari57@gmail.com,Syed,singh,banglore,2023-04-04,123,7777777777,7777888888,2Ss88887777
+3,saif123,fefe,ffefe,fefef,efefe,2023-04-03,123,fefef,fefefe,3fffefeefef
+4,a123,fefe,ffefe,fefef,efefe,2023-04-03,123,fefef,fefefe,34fgrgrgrr
