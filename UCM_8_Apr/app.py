@@ -1,10 +1,11 @@
 from datetime import datetime
-from flask import Flask, flash, render_template, url_for, flash, redirect, request
+from flask import Flask, flash, render_template, url_for, flash, redirect, request,render_template_string
 import csv
 import pandas as pd
 import cv2
 import pyzbar.pyzbar as pyzbar
-
+import qrcode
+from io import BytesIO
 # using those forms created here in our application
 
 
@@ -29,7 +30,7 @@ def cont():
 def reg():
     results = pd.read_csv('nameListUser.csv')
     x = len(results)
-    sno = x
+    sno = str(x+1)
     errors = {}
     if request.method == "POST":
         username = request.form["username"]
@@ -41,22 +42,24 @@ def reg():
         dateofbirth = request.form["dateofbirth"]
         aadhaar = request.form['aadhaar']
         phone = request.form['phone']
-
-        
+        uid = str(sno+firstname[0]+lastname[0]+phone[-4:]+aadhaar[-4:])
+         
+            
         fieldnamesU = ['sno','username', 'email', 'firstname', 'lastname',
-                       'location', 'dateofbirth', 'password', 'aadhaar', 'phone']
-
+                       'location', 'dateofbirth', 'password', 'aadhaar', 'phone','uid']
+        
+    
         with open('nameListUser.csv', 'a', newline='') as inFile:
+
             # DictWriter will help you write the file easily by treating the
             # csv as a python's class and will allow you to work with
             # dictionaries instead of having to add the csv manually.
             writer = csv.DictWriter(inFile, fieldnames=fieldnamesU)
             # writerow() will write a row in your csv file
             # while()
-            sno = x+1
 
             writer.writerow({"sno":sno,'username': username, 'email': email, 'firstname': firstname, 'lastname': lastname,
-                            'location': location, 'dateofbirth': dateofbirth, 'password': password,  'aadhaar': aadhaar,  'phone': phone})
+                            'location': location, 'dateofbirth': dateofbirth, 'password': password,  'aadhaar': aadhaar,  'phone': phone,"uid":uid})
 
     return render_template('register.html', title='Register', errors=errors, data=df)
 
@@ -208,9 +211,11 @@ def scan():
 
     return render_template("historyUser.html")
 
+
+@app.route('/qrgenerate', methods=['GET', 'POST'])
+def gen():
+    return render_template("qrgenerate.html")
     
-
-
 
 
     
