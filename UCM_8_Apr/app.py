@@ -1,7 +1,6 @@
 from datetime import datetime
 from flask import Flask, flash, render_template, url_for, flash, redirect, request,render_template_string
 import csv
-import pandas as pd
 import cv2
 import pyzbar.pyzbar as pyzbar
 import qrcode
