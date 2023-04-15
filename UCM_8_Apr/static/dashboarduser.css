@@ -72,17 +72,10 @@ body {
     padding-top: 20px;
     position: absolute;
     top: 70px;
-    width: 189px;
+    width: 250px;
     background-image: url('abstract-luxury-gradient-blue-background-smooth-dark-blue-with-black-vignette-studio-banner_1258-63998.jpg'); 
     background-repeat: no-repeat;
     background-size: cover;
-}
-.sidenav-url {
-    width: 100%;
-    text-align: center;
-    position: center;
-    left : 1px;
-
 }
 
 .profile {
@@ -159,8 +152,6 @@ body {
     box-shadow: 1px 1px 8px 0 grey;
     height: auto;
     margin-bottom: 20px;
-    padding : 12px;
-
     /* padding: 20px 0 20px 50px; */
 }
 
@@ -264,8 +255,4 @@ button {
   ::-webkit-scrollbar-thumb {
     background-color: #888;
     border-radius: 5px;
-  }
-  .url a {
-      display: inline-block;
-      /* Remove the block level display so that the link can be centered */
   }

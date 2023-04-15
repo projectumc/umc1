@@ -1,9 +1,9 @@
 from datetime import datetime
 from flask import Flask, flash, render_template, url_for, flash, redirect, request,render_template_string
 import csv
-import cv2
 import pandas as pd
-# import pyzbar.pyzbar as pyzbar
+import cv2
+import pyzbar.pyzbar as pyzbar
 import qrcode
 from io import BytesIO
 import os
@@ -12,6 +12,7 @@ app = Flask(__name__)
 
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
+df = pd.read_csv('nameListDoc.csv')
 
 
 @app.route('/')
@@ -60,7 +61,7 @@ def reg():
             writer.writerow({"sno":sno,'username': username, 'email': email, 'firstname': firstname, 'lastname': lastname,
                             'location': location, 'dateofbirth': dateofbirth, 'password': password,  'aadhaar': aadhaar,  'phone': phone,"uid":uid})
 
-    return render_template('register.html', title='Register', errors=errors)
+    return render_template('register.html', title='Register', errors=errors, data=df)
 
 
 @app.route('/doctor', methods=['GET', 'POST'])
@@ -93,7 +94,7 @@ def doc():
             writer.writerow({'sno':sno,'username': username, 'email': email, 'firstname': firstname, 'lastname': lastname,
                             'location': location, 'dateofbirth': dateofbirth, 'password': password,  'aadhaar': aadhaar,  'phone': phone})
 
-    return render_template('doctor.html', title='Register', errors=errors)
+    return render_template('doctor.html', title='Register', errors=errors, data=df)
 
 
 @app.route('/login', methods=['GET', 'POST'])
