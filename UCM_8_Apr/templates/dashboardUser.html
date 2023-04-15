@@ -20,7 +20,7 @@
         </div>
 
         <!-- Navbar -->
-        <ul>
+        <!-- <ul>
             <li>
                 <a href="#message">
                     <span class="icon-count">29</span>
@@ -40,16 +40,16 @@
             </li>
         </ul>
         <!-- End -->
-    </div>
+    </div> -->
     <!-- End -->
 
     <!-- Sidenav -->
     <div class="sidenav">
         <div class="profile">
-            <img src="https://imdezcode.files.wordpress.com/2020/02/imdezcode-logo.png" alt="" width="100" height="100">
+            <img src="{{ url_for('static',filename = 'userimage.png')}}" alt="" width="100" height="100">
 <!-- add username -->
             <div class="name">
-                Username
+                {{username}}
             </div>
             <!-- <div class="job">
                 Web Developer
@@ -57,17 +57,17 @@
         </div>
 
         <div class="sidenav-url">
-            <div class="url">
-                <a href='' class="active">Profile</a>
-                <hr align="center">
-            </div>
-            <div class="url">
-                <a href="/userhistory">Medical History</a>
-                <hr align="center">
-            </div>
             <form method ="POST">
                 <div class="container">
-                    <button name = "click">QRcode</button>
+                    <button class = 'xxx' name = "">Profile</button>
+                </div>
+            <form method ="POST">
+                <div class="container">
+                    <button class = 'xxx' name = "hist">Medical History</button>
+                </div>
+            <form method ="POST">
+                <div class="container">
+                    <button class = 'xxx' name = "click">QR-Code</button>
                 </div>      
         </div>
     </div>
@@ -75,7 +75,7 @@
 
     <!-- Main -->
     <div class="main">
-        <h2>IDENTITY</h2>
+        <h2>PROFILE</h2>
         <div class="card">
             <div class="card-body">
                 <i class="fa fa-pen fa-xs edit"></i>
@@ -113,7 +113,7 @@
                             <td>{{phone}}</td>
                         </tr>
                         <tr>
-                            <td><b>Adhaar number</b></td>
+                            <td><b>Aadhaar number</b></td>
                             <td>:</td>
                             <td>{{aadhaar}}</td>
                         </tr>

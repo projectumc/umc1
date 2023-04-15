@@ -11,30 +11,29 @@
 
   <body>
     <h1>Patient History</h1>
-    <form>
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" /><br /><br />
-
-      <label for="dob">Date of Birth:</label>
-      <input type="date" id="dob" name="dob" /><br /><br />
-
-      <label for="gender">Gender:</label>
-      <select id="gender" name="gender">
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-        <option value="other">Other</option></select
-      ><br /><br />
-
+    <form  method="post">
+      
+      <!-- <label for="name">Date</label>
+      <input name = "date" type="date" id="name">
+      <br>
+      <br> -->
       <label for="symptoms">Diagnosis:</label><br />
-      <textarea id="symptoms" name="symptoms"></textarea><br /><br />
+      <input type="text" name = "symptoms" id="symptoms">
 
       <label for="diagnosis">Treatment:</label><br />
-      <textarea id="diagnosis" name="diagnosis"></textarea><br /><br />
+      <input type="text" name = "diagnosis" id="diagnosis">
 
       <label for="treatment">Prescription:</label><br />
-      <textarea id="treatment" name="treatment"></textarea><br /><br />
+      <input type="text" name = "treatment" id="treatment">
 
-      <input type="submit" value="Save" />
+      <button class= "kkk" type="submit" class="btn">Send</button>
+
+      <br>
+      <br>
+
+      <button class = "kkk" name = "back">User History</button>
     </form>
+
+    
   </body>
 </html>

@@ -143,7 +143,12 @@ def dashboard(username):
     if request.method == 'POST':
         if 'click' in request.form:
              return redirect('/qrgenerate/{}'.format(username))
-            
+        
+        if 'hist' in request.form:
+             return redirect('/userhistory/{}'.format(username))
+        
+
+        
 
     with open('nameListUser.csv', 'r', newline='') as file:
         reader = csv.reader(file)
@@ -184,14 +189,65 @@ def dashboarddoc(username):
     return render_template("dashboardDoc.html", username=username, firstname=firstname, lastname=lastname, location=location, dateofbirth=dateofbirth, email=email, phone=phone, aadhaar=aadhaar)
 
 
-@app.route('/doctorhistory', methods=['GET', 'POST'])
-def history():
-    return render_template('historyDoctor.html')
+@app.route('/doctorhistory/<username>', methods=['GET', 'POST'])
+
+def history(username):
+
+    if request.method == 'POST':
+        if 'back' in request.form:
+             return redirect('/userhistory/{}'.format(username))
+        
+    now = datetime.now()
+    date = now.strftime('%Y-%m-%d')
+    time = now.strftime("%H:%M:%S")
+
+    errors = {}
+    if request.method == "POST":
+        symptoms = request.form["symptoms"]
+        diagnosis = request.form['diagnosis']
+        treatment = request.form["treatment"]
+        
+         
+            
+        fieldnamesx = ['username','date','time', 'symptoms', 'diagnosis', 'treatment']
+        
+    
+        with open('userhistory.csv', 'a', newline='') as inFile:
+            # DictWriter will help you write the file easily by treating the
+            # csv as a python's class and will allow you to work with
+            # dictionaries instead of having to add the csv manually.
+            writer = csv.DictWriter(inFile, fieldnames=fieldnamesx)
+            # writerow() will write a row in your csv file
+            # while()
+            writer.writerow({"username":username,'date': date,'time':time, 'symptoms': symptoms, 'diagnosis': diagnosis, 'treatment': treatment})
+            
+
+    
+
+    return render_template('historyDoctor.html',username=username,errors = errors)
 
 
-@app.route('/userhistory', methods=['GET', 'POST'])
-def userhistory():
-    return render_template("historyUser.html")
+@app.route('/userhistory/<username>', methods=['GET', 'POST'])
+def userhistory(username):
+
+    if request.method == 'POST':
+        if 'pogo' in request.form:
+             return redirect('/doctorhistory/{}'.format(username))
+        
+        
+    with open('userhistory.csv', 'r', newline='') as file:
+        reader = csv.reader(file)
+        data=[]
+
+        for row in reader:
+            if row[0] == username:
+                # date = row[1]
+                # symptoms = row[2]
+                # diagnosis = row[3]
+                # treatment= row[4]
+                data.append(row)
+                
+    return render_template("historyUser.html",data = data)#,date=date , symptoms = symptoms , diagnosis = diagnosis , treatment=treatment)
 
 
 @app.route('/scan')
@@ -210,7 +266,7 @@ def scan():
                 print(decoded_objects[0].data)
                 camera.release() # release the camera when a QR code is detected
                 data =decoded_objects[0].data.decode('utf-8')
-                print(data)
+                
             
         cv2.imshow('QR Code Scanner', frame)
         if cv2.waitKey(1) & 0xFF == ord('q'): # press 'q' to quit
@@ -219,9 +275,14 @@ def scan():
     camera.release() # release the camera when done
     cv2.destroyAllWindows() # destroy all windows
 
-    return render_template("historyUser.html")
-
-
+    with open('nameListUser.csv', 'r', newline='') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            if data == row[10]:
+                username = row[1]
+                return redirect ('/userhistory/{}'.format(username))
+                
+            
 @app.route('/qrgenerate/<username>', methods=['GET', 'POST'])
 def gen(username):
     uid = ""
@@ -252,6 +313,29 @@ def gen(username):
     return render_template("qrgenerate.html",username = username ,uid = uid,full_path = full_path)
                                   
     
+@app.route('/contact', methods=['GET', 'POST'])
+def x():
+    errors={}
+    if request.method == "POST":
+        firstname = request.form["firstname"]
+        lastname = request.form["lastname"]
+        email = request.form['email']
+        phone = request.form["phone"]
+        messege= request.form["messege"]
+       
+
+        fieldnamesy = ['firstname','lastname', 'email', 'phone', 'messege']
+
+        with open('contact.csv', 'a', newline='') as inFile:
+            # DictWriter will help you write the file easily by treating the
+            # csv as a python's class and will allow you to work with
+            # dictionaries instead of having to add the csv manually.
+            writer = csv.DictWriter(inFile, fieldnames=fieldnamesy)
+            # writerow() will write a row in your csv file
+            # while()
+            writer.writerow({'firstname':firstname,'lastname':lastname, 'email':email, 'phone':phone, 'messege':messege})
+
+    return render_template('contact.html',errors=errors)
 
 
     
