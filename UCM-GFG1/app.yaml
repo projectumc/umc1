@@ -1,4 +1,4 @@
-runtime: python
+runtime: python27
 
 entrypoint: gunicorn -b :$PORT main:app
 
