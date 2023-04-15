@@ -9,6 +9,7 @@ body {
     background-color: #e8f5ff;
     font-family: Arial;
     overflow: hidden;
+    overflow-y: scroll;
 }
 
 /* NavbarTop */
@@ -17,6 +18,9 @@ body {
     color: #333;
     box-shadow: 0px 4px 8px 0px grey;
     height: 70px;
+    background-image: url('abstract-luxury-gradient-blue-background-smooth-dark-blue-with-black-vignette-studio-banner_1258-63998.jpg'); 
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .title {
@@ -69,6 +73,9 @@ body {
     position: absolute;
     top: 70px;
     width: 250px;
+    background-image: url('abstract-luxury-gradient-blue-background-smooth-dark-blue-with-black-vignette-studio-banner_1258-63998.jpg'); 
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .profile {
@@ -150,9 +157,9 @@ body {
 
 .main .card table {
     border: none;
-    font-size: 25px;
+    font-size: 20px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    height: 950px;
+    height: 700px;
     width: 1000px;
 }
 
@@ -206,3 +213,46 @@ body{
     background-repeat: no-rep'liquid-blue-white-gradient-blurred-abstract-background_619119-322.jpg'eat;
         background-size: cover;
 }
+
+button {
+    width: 200px;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: lighter;
+    cursor: pointer;
+    border: none;
+    margin-left: 10%;
+}
+
+.xxx{
+    background: #fff;
+    color: black;
+    border: 2px solid black;
+    transition: background 400ms ease-out,
+                color 400ms ease-out,
+                border 400ms ease-out; 
+}
+.xxx:hover {
+    background: #9cd5da;
+    color: #393b82;
+    border: none;
+}
+.bright:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+  }
+
+
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 5px;
+  }

@@ -4,6 +4,7 @@ table {
     font-size: 16px;
     font-family: Arial, sans-serif;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    width: 50%;
 }
 
 th,
@@ -11,6 +12,7 @@ td {
     padding: 12px;
     border: none;
     border-bottom: 1px solid #e0e0e0;
+    text-align: center;
 }
 
 th {
@@ -70,4 +72,54 @@ h1 {
     color: black;
 }
 
+.xxx{
+    text-align:center;
+  width:184px;
+  line-height:2;
+  /* margin:48px auto; */
+  background-color: rgb(41, 206, 69);
+  font-size: large;
+  font-weight: bold;
+  box-shadow: 6px 6px #f2f5f6;
+  border-radius: 25px;
+  margin-left: 87%;
+  margin-top: 20%;
+  padding-top: 10px;
+}
 
+.xxx:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+  }
+
+  body{
+    background-image: url('abstract-luxury-gradient-blue-background-smooth-dark-blue-with-black-vignette-studio-banner_1258-63998.jpg'); 
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  button {
+    margin-left: 90%;
+    margin-top: 15%;
+    width: 150px;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: bolder;
+    cursor: pointer;
+    border: none;
+   
+}
+
+.kkk{
+    background: #fff;
+    color: black;
+    border: 2px solid black;
+    transition: background 400ms ease-out,
+                color 400ms ease-out,
+                border 400ms ease-out; 
+}
+.kkk:hover {
+    background: #9cd5da;
+    color: #393b82;
+    border: none;
+}

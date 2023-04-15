@@ -5,6 +5,9 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    background-image: url('abstract-luxury-gradient-blue-background-smooth-dark-blue-with-black-vignette-studio-banner_1258-63998.jpg'); 
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 h1 {
@@ -82,4 +85,30 @@ input[type="submit"]:hover {
         font-size: 14px;
         padding: 8px 16px;
     }
+}
+
+
+
+button {
+    width: 100px;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: lighter;
+    cursor: pointer;
+    border: none;
+   
+}
+
+.kkk{
+    background: #fff;
+    color: black;
+    border: 2px solid black;
+    transition: background 400ms ease-out,
+                color 400ms ease-out,
+                border 400ms ease-out; 
+}
+.kkk:hover {
+    background: #9cd5da;
+    color: #393b82;
+    border: none;
 }
