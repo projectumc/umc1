@@ -3,159 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctor Profile Page</title>
+    <title>Document</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename = 'dashboarduser-2.css')}}"/>
+<script>
+    function displayImage(input) {
+        var file = input.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.querySelector('.profile-img img').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
 
-    <!-- Custom Css -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename = 'dashboarduser.css')}}"/>
 
-    <!-- FontAwesome 5 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
 </head>
 <body>
-    <!-- Navbar top -->
-    <div class="navbar-top">
-        <div class="title">
-            <h1>Doctor Profile</h1>
-        </div>
 
-        <!-- Navbar -->
-        <!-- <ul>
-            <li>
-                <a href="#message">
-                    <span class="icon-count">29</span>
-                    <i class="fa fa-envelope fa-2x"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#notification">
-                    <span class="icon-count">59</span>
-                    <i class="fa fa-bell fa-2x"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#sign-out">
-                    <i class="fa fa-sign-out-alt fa-2x"></i>
-                </a>
-            </li>
-        </ul> -->
-        <!-- End -->
-    </div>
-    <!-- End -->
-
-    <!-- Sidenav -->
-    <div class="sidenav">
-        <div class="profile">
-            <img src="{{ url_for('static',filename = 'userimage.png')}}" alt="" width="100" height="100">
-<!-- add username -->
-            <div class="name">
-                {{username}}
-            </div>
-            <!-- <div class="job">
-                Web Developer
-            </div> -->
-        </div>
-
-        <div class="sidenav-url">
-            <form method ="POST">
-                <div class="container">
-                    <button class = 'xxx' name = "">Profile</button>
+    <div class="container emp-profile">
+        <form method="post">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        <img src="{{ url_for('static',filename = 'profile.jpg')}}" alt=""/>
+                        <div class="file btn btn-lg btn-primary">
+                            Change Photo
+                            <input type="file" name="file" id="file" accept="image/*" onchange="displayImage(this)" />
+                        </div>
+                    </div>
                 </div>
-                </form>
-            <div class="container">
-                <button class = "xxx" onclick="window.location.href='/scan'">Scan QR Code</button>
-                <hr align="center">
-            </div>
-        </div>
-    </div>
-    <!-- End -->
-
-    <!-- Main -->
-    <div class="main">
-        <h2>PROFILE</h2>
-        <div class="card">
-            <div class="card-body">
-                <i class="fa fa-pen fa-xs edit"></i>
-                <table>
-                    <tbody>
-                        <tr>
-                            <!-- add in td from database -->
-                            <td><b>First Name</b></td>
-                            <td>:</td>
-                            <td>{{firstname}}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Last Name</b></td>
-                            <td>:</td>
-                            <td>{{lastname}}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Location</b></td>
-                            <td>:</td>
-                            <td>{{location}}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Date Of Birth</B></td>
-                            <td>:</td>
-                            <td>{{dateofbirth}}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Email</b></td>
-                            <td>:</td>
-                            <td>{{email}}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Phone number</b></td>
-                            <td>:</td>
-                            <td>{{phone}}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Aadhaar number</b></td>
-                            <td>:</td>
-                            <td>{{aadhaar}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- <h2>SOCIAL MEDIA</h2>
-        <div class="card">
-            <div class="card-body">
-                <i class="fa fa-pen fa-xs edit"></i>
-                <div class="social-media">
-                    <span class="fa-stack fa-sm">
-                        <i class="fas fa-circle fa-stack-2x"></i>
-                        <i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <span class="fa-stack fa-sm">
-                        <i class="fas fa-circle fa-stack-2x"></i>
-                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <span class="fa-stack fa-sm">
-                        <i class="fas fa-circle fa-stack-2x"></i>
-                        <i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <span class="fa-stack fa-sm">
-                        <i class="fas fa-circle fa-stack-2x"></i>
-                        <i class="fab fa-invision fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <span class="fa-stack fa-sm">
-                        <i class="fas fa-circle fa-stack-2x"></i>
-                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <span class="fa-stack fa-sm">
-                        <i class="fas fa-circle fa-stack-2x"></i>
-                        <i class="fab fa-whatsapp fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <span class="fa-stack fa-sm">
-                        <i class="fas fa-circle fa-stack-2x"></i>
-                        <i class="fab fa-snapchat fa-stack-1x fa-inverse"></i>
-                    </span>
+                <div class="col-md-6">
+                    <div class="profile-head">
+                                <h5>
+                                   {{username}}
+                                </h5>
+                                <h6>
+                                    Doctor
+                                </h6>
+                                <p class="proile-rating">Sno : <span>{{sno}}</span></p>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
                 </div>
             </div>
-        </div>
-    </div> -->
-    <!-- End -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-work">
+                        <p>Menu</p>
+                        <a href="/">Home</a><br/>
+                        <a href="/scan">Scan QR-code</a>
+                        <p>Extra</p>
+                        <a href="">lorem</a><br/>
+                        <a href="">lorem</a><br/>
+                        <a href="">lorem</a><br/>
+                        <a href="">lorem</a><br/>
+                        <a href="">lorem</a><br/>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>First name</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{firstname}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Last name</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{lastname}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Date of birth</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{dateofbirth}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Phone</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{phone}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Email</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{email}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Location</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{location}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Aadhaar number</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{aadhaar}}</p>
+                                        </div>
+                                    </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Location</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{location}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label></label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>10$/hr</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Total Projects</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>230</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>English Level</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>Expert</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Availability</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>6 months</p>
+                                        </div>
+                                    </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>Your Bio</label><br/>
+                                    <p>Your detail description</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>           
+    </div>
+    
 </body>
 </html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Patient History</title>
+  </head>
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="{{ url_for('static',filename = 'upload_symp.css')}}"
+  />
+
+  <body>
+    <div class="container">  
+      <form id="contact" action="" method="post">
+        <h3>Uploading Data</h3>
+        <h4>Contact us for custom quote</h4>
+        
+        <fieldset>
+          <label for="name">Date</label>
+          <input  type="date" tabindex="3" required  type="date" id="name">
+        </fieldset>
+        <fieldset>
+          <label for="symptoms">Diagnosis:</label>
+          <input type="text" tabindex="4" required name = "symptoms" id="symptoms">
+        </fieldset>
+        <fieldset>
+          <label for="diagnosis">Treatment:</label>
+          <textarea  tabindex="5" required  name = "diagnosis" id="diagnosis"></textarea>
+        </fieldset>
+          <fieldset>
+            <label for="treatment">Prescription:</label>
+            <textarea tabindex="5" required name = "treatment" id="treatment"></textarea>
+          </fieldset>
+          <fieldset>
+          <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+        </fieldset>
+        <p class="copyright">Go back <a href="/userhistory/{{username}}" target="_blank" title="Colorlib">History</a></p>
+      </form>
+    </div>
+
+    
+  </body>
+</html>

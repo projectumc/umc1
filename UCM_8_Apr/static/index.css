@@ -1,7 +1,5 @@
 
-html {
-    scroll-behavior: smooth;
-  }
+
   
   hr {
     height: 20px;
@@ -14,6 +12,7 @@ html {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
     
+    
     header{
      width: 100%;
      height: 100vh;
@@ -24,52 +23,47 @@ html {
     
     .mainheader{
      width: 100%;
-     height: 100px;
+     height: 70px;
      display: flex;
      justify-content: space-between;
      align-items: center;
-      background-image: url("light-blue-background-abstract-42521993.jpg"); 
+     
      background-repeat: no-repeat;
      background-size: cover;
-     background: linear-gradient(-45deg,#a5c7d9, white, #a5c7d9,white);
-	animation: gradient 15s ease infinite;
-    height: 70;
+     background-color: white;
+	    animation: gradient 15s ease infinite;
+      height: 70;
 }
 
-@keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
-}
+
+
     
     .mainheader .logo img{
-     width: 250px; height: 70px;
+     width: 110px; height: 40px;
      padding-left: 60px;
     }
     
     .mainheader nav{
-     width: 450px;
+     width: 550px;
      display: flex;
      justify-content: space-around;
      align-items: center;
     }
     
+    
+
     .mainheader nav a{
      text-decoration: none;
-     color: rgb(56, 39, 113);
-     /* ext-transform: uppercase; */
-     font-weight: bolder;
+     color: black;
+     font-weight: 550;
+     font-family: roboto, Arial, Helvetica, sans-serif;    /* ext-transform: uppercase; */
+    cursor: pointer;
      
     }
 
     .mainheader nav a:hover{
-        color: white;
+        color: rgb(83, 144, 218);
+        transition: color 0.5s;
 
     }
     
@@ -77,70 +71,63 @@ html {
      margin-right: 50px;
     }
 
-    /* button.loginbtn{
-        
-        background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
-    }
-    button.regbtn{
-        background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
-    } */         
+         
     button.loginbtn {
-        background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA  51%, #77A1D3  100%);
-        /* text-transform: uppercase; */
-        transition: 0.5s;
-        background-size: 200% auto;
-        box-shadow: 0 0 20px #eee;
-        border-radius: 10px;
-        margin-right: 10px;
+
+      background-color:rgb(83, 144, 218);
+  border: none;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition: 0.3s;
+  cursor: pointer;
+        
       }
 
       button.loginbtn:hover {
-        background-position: right center; /* change the direction of the change here */
-        color: rgb(238, 238, 243);
-        text-decoration: none;
-        font-weight: bolder;
+        background-color: rgb(63, 109, 164);
+        opacity: 0.8;
         
+      
 
       }
       button.regbtn {
-        background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA  51%, #77A1D3  100%);
-        /* text-transform: uppercase; */
-        transition: 0.5s;
-        background-size: 200% auto;         
-        box-shadow: 0 0 20px #eee;
-        border-radius: 10px;
+        background-color:rgb(83, 144, 218);
+        border: none;
+        padding: 16px 32px;
+        text-align: center;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition: 0.3s;
+        cursor: pointer;
 
       }
 
       button.regbtn:hover {
-        background-position: right center; /* change the direction of the change here */
-        color: rgb(234, 234, 241);
-        text-decoration: none;
-        font-weight: bolder;
+        background-color: rgb(63, 109, 164);
+        opacity: 0.8;
+
+        
       }
 
-
+     
       span.x{
-        color: rgb(8, 8, 132);
-        font-weight: bold;
+
+        font-family: roboto , Arial, Helvetica, sans-serif;
+        color: white;
+      font-weight: bold;
+       
       }
       span.y{
-        color: rgb(8, 8, 132);
+        font-family: roboto , Arial, Helvetica, sans-serif;
+        color: white;
         font-weight: bold;
       }
      
 
 
-    .menubtn a{
-        text-decoration: none;
-        color: rgb(8, 8, 132);
-        font-weight: bolder;
-    }
-
-    .menubtn a:hover{
-        color: white;
-        
-    }
+    
     
     .mainheader button{
      padding: 10px 45px;
@@ -169,34 +156,51 @@ html {
      padding-left: 100px;
     }
     
+    @keyframes fadeIn {
+      from {
+          opacity: 0;
+          transform: translateY(20px);
+      }
+      to {
+          opacity: 1;
+          transform: translateY(0);
+      }
+  }
     .left-sec h2{
-     font-size: 20px;
+     font-size: 25px;
      text-transform: capitalize;
      font-weight: lighter;
      color: #242424;
      margin-top: 100px;
+
+     opacity: 0;
+    animation: fadeIn 0.5s ease-in-out forwards;
+    animation-delay: 0.5s;
     }
     
     .left-sec h1{
-     font-size: 55px;
+     font-size: 70px;
      text-transform: capitalize;
      font-weight: 700;
      margin: 15px 0;
+
+     opacity: 0;
+    animation: fadeIn 0.5s ease-in-out forwards;
+    animation-delay: 0.7s;
+     
+  
     }
     
     .left-sec p{
      margin-bottom: 20px;
+     font-size: 20px;
+
+     opacity: 0;
+    animation: fadeIn 0.5s ease-in-out forwards;
+    animation-delay: 0.9s;
     }
     
-    .left-sec button{
-     padding: 15px 45px;
-     text-align: center;
-     font-size: 14px;
-     color: white;
-     border: none;
-     background-image: linear-gradient(to right,#649bff,#0070fa,#649bff);
-     border-radius: 10px;
-    }
+   
 
     img.database{
         padding-top: 100px;
@@ -221,10 +225,12 @@ html {
 }
 
     body {
-        background-image:url("liquid-blue-white-gradient-blurred-abstract-background_619119-322.jpg");
-        
-        background-repeat: no-rep'liquid-blue-white-gradient-blurred-abstract-background_619119-322.jpg'eat;
-        background-size: cover;
+
+      height: 100%;
+      background-image: url('bg1.jpg'); /* Adjust the path accordingly */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
    
   
@@ -301,29 +307,48 @@ html {
     }
 
 
-    button.more {
-        background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA  51%, #77A1D3  100%);
-        /* text-transform: uppercase; */
-        transition: 0.5s;
-        background-size: 200% auto;         
-        box-shadow: 0 0 20px #eee;
-        border-radius: 10px;
+    .learn-more {
+      background-color:rgb(83, 144, 218);
+  border: none;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 15px;
+  margin: 4px 2px;
+  transition: 0.3s;
+  cursor: pointer;
+  border-radius: 50px;
+  color: rgb(250, 244, 244);
 
+  opacity: 0;
+    animation: fadeIn 0.5s ease-in-out forwards;
+    animation-delay: 0.9s;
+        
       }
 
-      button.more:hover {
-        background-position: right center; /* change the direction of the change here */
-        color: rgb(234, 234, 241);
-        text-decoration: none;
+      .learn-more:hover {
+        background-color: rgb(63, 109, 164);
+        opacity: 0.8;
         
       }
 
       span.more_button{
-        color:  rgb(27, 68, 138);
+        font-family: roboto , Arial, Helvetica, sans-serif;
+        color: white;
         font-weight: bold;
       }
 
-   
+      @media screen and (max-width: 600px) {
+        /* Styles for screens with a maximum width of 600px */
+        header, footer {
+            font-size: 14px;
+        }
+
+        section {
+            padding: 0.5em;
+        }
+    }
+
+    
 
 
     

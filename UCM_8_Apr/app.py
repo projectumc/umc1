@@ -25,6 +25,14 @@ def home():
 def cont():
     return render_template("contact.html")
 
+@app.route('/service')
+def service():
+    return render_template("service.html")
+
+@app.route('/team')
+def team():
+    return render_template("team.html")
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def reg():
@@ -156,6 +164,8 @@ def dashboard(username):
 
         for row in reader:
             if row[1] == username:
+                sno = row[0]
+                username = row[1]
                 firstname = row[3]
                 lastname = row[4]
                 location = row[5]
@@ -167,7 +177,7 @@ def dashboard(username):
                
         
 
-    return render_template("dashboardUser.html",username=username, firstname=firstname, lastname=lastname, location=location, dateofbirth=dateofbirth, email=email, phone=phone, aadhaar=aadhaar)
+    return render_template("dashboardUser-2.html",sno = sno, username=username, firstname=firstname, lastname=lastname, location=location, dateofbirth=dateofbirth, email=email, phone=phone, aadhaar=aadhaar)
 
 
 @app.route('/dashboardDoc/<username>', methods=['GET', 'POST'])
@@ -190,7 +200,7 @@ def dashboarddoc(username):
     return render_template("dashboardDoc.html", username=username, firstname=firstname, lastname=lastname, location=location, dateofbirth=dateofbirth, email=email, phone=phone, aadhaar=aadhaar)
 
 
-@app.route('/doctorhistory/<username>', methods=['GET', 'POST'])
+@app.route('/upload_symp/<username>', methods=['GET', 'POST'])
 
 def history(username):
 
@@ -225,15 +235,17 @@ def history(username):
 
     
 
-    return render_template('historyDoctor.html',username=username,errors = errors)
+    return render_template('upload_symp.html',username=username,errors = errors)
 
 
 @app.route('/userhistory/<username>', methods=['GET', 'POST'])
 def userhistory(username):
 
     if request.method == 'POST':
-        if 'pogo' in request.form:
-             return redirect('/doctorhistory/{}'.format(username))
+        if 'up' in request.form:
+             return redirect('/upload_symp/{}'.format(username))
+        if 'pro' in request.form:
+             return redirect('/dashboardUser/{}'.format(username))
         
         
     with open('userhistory.csv', 'r', newline='') as file:
@@ -324,6 +336,7 @@ def x():
         phone = request.form["phone"]
         messege= request.form["messege"]
        
+
 
         fieldnamesy = ['firstname','lastname', 'email', 'phone', 'messege']
 

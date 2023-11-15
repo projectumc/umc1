@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href='https://fonts.googleapis.com/css?family=Muli' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <link
       href="{{ url_for('static',filename = 'login.css')}}"
       rel="stylesheet"
@@ -18,7 +21,7 @@
   </head>
   <body>
     <div class="center">
-      <h1>Login</h1>
+      <h1 style="font-size: 25px;">Login</h1>
       <form method="POST">
         <div class="txt_field">
           <input type="text" required name="username" />
@@ -44,7 +47,7 @@
             >Remember me</span>
         </div> -->
         <input type="submit" value="Login" />
-        <div class="signup_link">
+        <div style="font-size: 15px;" class="signup_link">
           Not a member? <a href="/register">Signup</a>
         </div>
       </form>
