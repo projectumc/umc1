@@ -1,0 +1,65 @@
+/* General styling */
+body {
+    font-family: roboto , Arial, Helvetica, sans-serif;
+    background-image: url('login.jpg');
+    background-repeat: no-repeat;
+     background-size: cover;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Medical history table styling */
+  .medical-history {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .medical-history th,
+  .medical-history td {
+    padding: 10px;
+    border: 1px solid rgb(71, 71, 71);
+    background-color: white;
+    text-align: center;
+  }
+  
+  .medical-history th {
+    background-color: white;
+    font-weight: bold;
+  }
+  
+  /* Upload button styling */
+  .upload-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color:rgb(83, 144, 218);
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.4s;
+  }
+  
+  .upload-button:hover {
+    background-color:white;
+    color: rgb(83, 144, 218);
+  }
+
+  .upload-button {
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    width: 100px;
+    text-align: center;
+    display: inline-block;
+    margin-right: 5px;
+  }
+
+  
+  
