@@ -1,5 +1,8 @@
 from datetime import datetime
 from flask import Flask, flash, render_template, url_for, flash, redirect, request,render_template_string
+from flask import Flask, render_template, request, jsonify
+import json  # Make sure to include this line
+import time
 import csv
 import pandas as pd
 import cv2
@@ -7,6 +10,8 @@ import pyzbar.pyzbar as pyzbar
 import qrcode
 from io import BytesIO
 import os
+from  src.gmaps import Gmaps
+import time
 # using those forms created here in our application
 app = Flask(__name__)
 
@@ -350,10 +355,37 @@ def x():
             writer.writerow({'firstname':firstname,'lastname':lastname, 'email':email, 'phone':phone, 'messege':messege})
 
     return render_template('contact.html',errors=errors)
+@app.route('/query')
+def query():
+    user_query = request.args.get('query', '')
+    return render_template('query.html', user_query=user_query)
 
+@app.route('/scrape', methods=['POST'])
+def scrape():
+    data = json.loads(request.data)
+    queries = data.get('queries', [])
 
-    
+    fields = ["name", "description", "reviews", "website", "main_category", "rating", "categories", "phone", "address", "plus_code", "time_zone"]
 
+    result = []
+
+    for query in queries:
+        try:
+            # Run scraping for each query
+            result_query = Gmaps.places([query], max=12)  # Replace with your actual scraping logic
+
+            # Filter the result based on the specified fields
+            filtered_result = []
+            for res in result_query:
+                for place in res['places']:
+                    filtered_place = {field: place[field] for field in fields if field in place}
+                    filtered_result.append(filtered_place)
+
+            result.append({"query": query, "result": filtered_result})
+        except Exception as e:
+            print(f"Error scraping for query '{query}': {e}")
+
+    return jsonify({"result": result})
 if __name__ == '__main__':
-
     app.run(debug=True)
+
